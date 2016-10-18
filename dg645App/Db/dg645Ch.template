@@ -1,0 +1,68 @@
+#--- Delay ----------------------------------------------------
+record( ao, "$(P):DELAY:CH$(CHAN)"){
+  field( DESC, "Delay, channel $(CHAN)")
+  field( PREC, "15")
+  field( EGU,  "s")
+  field( DRVL, "5E-12")
+  field( DRVH, "1E16")
+  field( LOPR, "5E-12")
+  field( HOPR, "1E16")
+  field( OUT,  "$(P):DELAY:CH$(CHAN)_write PP")
+}
+record( ao, "$(P):DELAY:CH$(CHAN)_write"){
+  field( DTYP, "stream")
+  field( SDIS, "$(P):DELAY:CH$(CHAN)_sync.PACT")
+  field( DISV, "1")
+  field( OUT,  "@$(PROTOFILE) setDelay($(CHAN),$(REF)) $(L) $(A)")
+  field( PREC, "15")
+  field( EGU,  "s")
+}
+record( ai, "$(P):DELAY:CH$(CHAN)_RBV"){
+  field( DESC, "Delay, channel $(CHAN)")
+  field( DTYP, "stream")
+  field( INP,  "@$(PROTOFILE) getDelay($(CHAN)) $(L) $(A)")
+  field( PREC, "15")
+  field( EGU,  "s")
+  field( FLNK, "$(P):DELAY:CH$(CHAN)_sync")
+}
+record( ao, "$(P):DELAY:CH$(CHAN)_sync"){
+  field( PREC, "15")
+  field( EGU,  "s")
+  field( DOL,  "$(P):DELAY:CH$(CHAN)_RBV NPP")
+  field( OMSL, "closed_loop")
+  field( OUT,  "$(P):DELAY:CH$(CHAN) PP")
+}
+#--- Ref ------------------------------------------------------------
+record( mbbi, "$(P):REF:CH$(CHAN)"){
+  field( DESC, "Delay reference, channel $(CHAN)")
+  field( DTYP, "stream")
+  field( INP,  "@$(PROTOFILE) getRef($(CHAN)) $(L) $(A)")
+  field( ZRVL, "0")
+  field( ONVL, "1")
+  field( TWVL, "2")
+  field( THVL, "3")
+  field( FRVL, "4")
+  field( FVVL, "5")
+  field( SXVL, "6")
+  field( SVVL, "7")
+  field( EIVL, "8")
+  field( NIVL, "9")
+  field( ZRST, "T0")
+  field( ONST, "T1")
+  field( TWST, "A")
+  field( THST, "B")
+  field( FRST, "C")
+  field( FVST, "D")
+  field( SXST, "E")
+  field( SVST, "F")
+  field( EIST, "G")
+  field( NIST, "H")
+}
+record(longout, "$(P):REF:CH$(CHAN)_write"){
+  field( DTYP, "stream")
+  #field( SDIS, "$(P):DELAY:CH$(CHAN)_sync.PACT")
+  #field( DISV, "1")
+  field( OUT,  "@$(PROTOFILE) setRef($(CHAN)) $(L) $(A)")
+  #field( VAL,  "$(REF)")
+}
+

@@ -1,0 +1,83 @@
+record( ao, "$(P):DELAY:REGEN$(REG)"){
+  field( DESC, "Delay, regen $(REG)")
+  field( PREC, "3")
+  field( DRVL, "0")
+  field( DRVH, "10000")
+  field( LOPR, "0")
+  field( HOPR, "10000")
+  field( EGU,  "ns")
+  field( FLNK, "$(P):DELAY:REGEN$(REG):WRITE")
+}
+record( calcout, "$(P):DELAY:REGEN$(REG):WRITE"){
+  field( DESC, "Delay, regen $(REG)")
+  field( SDIS, "$(P):DELAY:REGEN$(REG):SYNC.PACT")
+  field( DISV, "1")
+  field( INPA, "$(P):DELAY:REGEN$(REG)")
+  field( CALC, "A*1E-9")
+  field( PREC, "3")
+  field( EGU,  "ns")
+  field( OUT,  "$(P):DELAY:CH$(CHAN1) CPP")
+}
+record( calc, "$(P):DELAY:REGEN$(REG):RBV"){
+  field( DESC, "Delay, regen $(REG)")
+  field( INPA, "$(P):DELAY:CH$(CHAN1) CPP")
+  field( CALC, "A*1E9")
+  field( PREC, "3")
+  field( EGU,  "ns")
+  field( FLNK, "$(P):DELAY:REGEN$(REG):SYNC")
+}
+record( ao, "$(P):DELAY:REGEN$(REG):SYNC"){
+  field( DESC, "Delay, regen $(REG)")
+  field( PREC, "3")
+  field( EGU,  "ns")
+  field( DOL,  "$(P):DELAY:REGEN$(REG):RBV NPP")
+  field( OMSL, "closed_loop")
+  field( OUT,  "$(P):DELAY:REGEN$(REG) PP")
+}
+#---------------------------------------------------------
+#record( calc, "$(P):WIDTH:REGEN$(REG)"){
+#  field( DESC, "Pulse width, regen $(REG)")
+#  field( INPA, "$(P):DELAY:CH$(CHAN1) CPP")
+#  field( INPB, "$(P):DELAY:CH$(CHAN2) CPP")
+#  field( CALC, "(B-0)*1E9")
+#  field( PREC, "3")
+#  field( EGU,  "ns")
+#}
+record( ao, "$(P):WIDTH:REGEN$(REG)"){
+  field( DESC, "Width, regen $(REG)")
+  field( PREC, "3")
+  field( DRVL, "0")
+  field( DRVH, "10000")
+  field( LOPR, "0")
+  field( HOPR, "10000")
+  field( EGU,  "ns")
+  field( FLNK, "$(P):WIDTH:REGEN$(REG):WRITE")
+}
+record( calcout, "$(P):WIDTH:REGEN$(REG):WRITE"){
+  field( DESC, "Width, regen $(REG)")
+  field( SDIS, "$(P):WIDTH:REGEN$(REG):SYNC.PACT")
+  field( DISV, "1")
+  field( INPA, "$(P):WIDTH:REGEN$(REG)")
+  field( CALC, "A*1E-9")
+  field( PREC, "3")
+  field( EGU,  "ns")
+  field( OUT,  "$(P):DELAY:CH$(CHAN2) CPP")
+}
+record( calc, "$(P):WIDTH:REGEN$(REG):RBV"){
+  field( DESC, "Width, regen $(REG)")
+  field( INPA, "$(P):DELAY:CH$(CHAN2) CPP")
+  field( CALC, "A*1E9")
+  field( PREC, "3")
+  field( EGU,  "ns")
+  field( FLNK, "$(P):WIDTH:REGEN$(REG):SYNC")
+}
+record( ao, "$(P):WIDTH:REGEN$(REG):SYNC"){
+  field( DESC, "Width, regen $(REG)")
+  field( PREC, "3")
+  field( EGU,  "ns")
+  field( DOL,  "$(P):WIDTH:REGEN$(REG):RBV NPP")
+  field( OMSL, "closed_loop")
+  field( OUT,  "$(P):WIDTH:REGEN$(REG) PP")
+}
+
+

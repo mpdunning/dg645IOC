@@ -1,0 +1,25 @@
+InTerminator=CR LF;
+OutTerminator=CR;
+ReadTimeout=1500;
+
+idn              { out "*idn?"                           ;in "%100c"                ; }
+getStatus        { out "*stb?"                           ;in "%i"                   ; }
+getErr           { out "lerr?"                           ;in "%i"                   ; }
+
+getTrigSrc       { out "tsrc?"                           ;in "%i"                   ; }
+setTrigSrc       { out "tsrc %d"                                                    ; }
+getTrigLvl       { out "tlvl?"                           ;in "%f"                   ; }
+setTrigLvl       { out "tlvl %f"                                                    ; }
+getTrigRate      { out "trat?"                           ;in "%f"                   ; }
+setTrigRate      { out "trat %f"                                                    ; }
+singleShot       { out "*trg"                                                       ; }
+
+getBurstMode     { out "burm?"                           ;in "%i"                   ; }
+getBurstCnt      { out "burc?"                           ;in "%i"                   ; }
+getBurstDelay    { out "burd?"                           ;in "%f"                   ; }
+getBurstPeriod   { out "burp?"                           ;in "%f"                   ; }
+
+getDelay         { out "dlay? \$1"                       ;in "%*i,%f"               ; }
+setDelay         { out "dlay  \$1,\$2,%e"                                           ; }
+getRef           { out "dlay? \$1"                       ;in "%i,%*f"               ; }
+setRef           { out "link  \$1,%d"                                               ; }

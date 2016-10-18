@@ -1,0 +1,8 @@
+file regens.template {
+pattern 
+{REG, CHAN1, CHAN2}
+{  1,     4,     5}
+{  2,     6,     7}
+{  3,     8,     9}
+}
+

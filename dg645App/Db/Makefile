@@ -2,7 +2,7 @@ TOP=../..
 include $(TOP)/configure/CONFIG
 
 DB += dg645.db
-DB += dg645Ch.db
+#DB += dg645Ch.db
 DB += regens.db
 DB += asynIO.db
 DB_INSTALLS += $(ASYN)/db/asynRecord.db

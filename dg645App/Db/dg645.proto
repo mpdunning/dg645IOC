@@ -3,10 +3,12 @@ OutTerminator=CR;
 ReadTimeout=1500;
 
 idn              { out "*idn?"                           ;in "%100c"                ; }
-getStatus        { out "*stb?"                           ;in "%i"                   ; }
-getErr           { out "lerr?"                           ;in "%i"                   ; }
+getStatus        { out "*stb?"                           ;in "%d"                   ; }
+getErr           { out "lerr?"                           ;in "%d"                   ; }
+getTimebase      { out "timb?"                           ;in "%d"                   ; }
+getIPAddr        { out "ifcf? 11"                        ;in "%s"                   ; }
 
-getTrigSrc       { out "tsrc?"                           ;in "%i"                   ; }
+getTrigSrc       { out "tsrc?"                           ;in "%d"                   ; }
 setTrigSrc       { out "tsrc %d"                                                    ; }
 getTrigLvl       { out "tlvl?"                           ;in "%f"                   ; }
 setTrigLvl       { out "tlvl %f"                                                    ; }
@@ -14,12 +16,16 @@ getTrigRate      { out "trat?"                           ;in "%f"               
 setTrigRate      { out "trat %f"                                                    ; }
 singleShot       { out "*trg"                                                       ; }
 
-getBurstMode     { out "burm?"                           ;in "%i"                   ; }
-getBurstCnt      { out "burc?"                           ;in "%i"                   ; }
+getBurstMode     { out "burm?"                           ;in "%d"                   ; }
+getBurstCnt      { out "burc?"                           ;in "%d"                   ; }
 getBurstDelay    { out "burd?"                           ;in "%f"                   ; }
 getBurstPeriod   { out "burp?"                           ;in "%f"                   ; }
 
-getDelay         { out "dlay? \$1"                       ;in "%*i,%f"               ; }
-setDelay         { out "dlay  \$1,\$2,%e"                                           ; }
-getRef           { out "dlay? \$1"                       ;in "%i,%*f"               ; }
+getAdvTrigMode   { out "advt?"                           ;in "%d"                   ; }
+getTrigHoldoff   { out "hold?"                           ;in "%f"                   ; }
+getTrigInhibit   { out "inhb?"                           ;in "%d"                   ; }
+
+getDelay         { out "dlay? \$1"                       ;in "%*d,%f"               ; }
+setDelay         { out "dlay  \$1,%(\$2)d,%e"                                       ; }
+getRef           { out "link? \$1"                       ;in "%d"                   ; }
 setRef           { out "link  \$1,%d"                                               ; }

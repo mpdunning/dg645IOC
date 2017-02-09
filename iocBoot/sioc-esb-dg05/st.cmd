@@ -26,8 +26,7 @@ vxi11Configure( "L0","$(IP)",0,0.0,"$(ADDR)",0,0)
 #asynSetTraceIOMask("L0",-1,0x2)
 
 dbLoadRecords("db/dg645.db","IOCNAME=${IOC},P=$(P),DESC=$(DESC),PROTOFILE=$(PROTOFILE),PORT=P0,L=L0,A=$(ADDR),DELAY0=$(DELAY0),SCAN0=$(SCAN0),DELAY1=$(DELAY1),SCAN1=$(SCAN1)")
-dbLoadRecords("db/dg645Ch.db","P=$(P),PROTOFILE=$(PROTOFILE),PORT=P0,L=L0,A=$(ADDR)")
-#dbLoadRecords("db/regens.db","P=$(P)")
+dbLoadRecords("db/regens.db","P=$(P)")
 dbLoadRecords("db/asynRecord.db","P=$(P):,R=asyn,PORT=L0,ADDR=0,OMAX=0,IMAX=0")
 
 cd ${TOP}/iocBoot/${IOC}

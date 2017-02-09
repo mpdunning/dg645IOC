@@ -3,6 +3,7 @@ record(stringin, "$(P):IOC") {
   field(VAL,  "$(IOCNAME)")
   field(PINI, "1")
 }
+
 record(waveform, "$(P):IDN"){
   field(DESC, "SCPI ID String")
   field(DTYP, "stream")
@@ -11,6 +12,14 @@ record(waveform, "$(P):IDN"){
   field(FTVL, "CHAR")
   field(PINI, "YES")
 }
+
+record(stringin, "$(P):IPADDR") {
+  field(DESC, "IP Address")
+  field(DTYP, "stream")
+  field(INP,  "@$(PROTOFILE) getIPAddr $(L) $(A)")
+  field(PINI, "1")
+}
+
 record(bo, "$(P):REMOTE") {
   field(DESC, "Remote enable")
   field(ZNAM, "Enable")
@@ -18,6 +27,22 @@ record(bo, "$(P):REMOTE") {
   field(VAL,  "0")
   field(PINI, "1")
 }
+
+record(mbbi, "$(P):TIMEBASE"){
+  field(DESC, "Timebase")
+  field(DTYP, "stream")
+  field(INP,  "@$(PROTOFILE) getTimebase $(L) $(A)")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(ZRST, "Internal")
+  field(ONST, "OCXO")
+  field(TWST, "Rubidium")
+  field(THST, "External")
+  field(PINI, "1")
+}
+
 record(mbbi, "$(P):STATUS"){
   field(DESC, "Status byte")
   field(DTYP, "stream")
@@ -39,11 +64,13 @@ record(mbbi, "$(P):STATUS"){
   field(SXST, "Master Summary Bit")
   field(SVST, "")
 }
+
 record(longin, "$(P):ERROR"){
   field(DESC, "Error Code")
   field(DTYP, "stream")
   field(INP,  "@$(PROTOFILE) getErr $(L) $(A)")
 }
+
 # Trigger --------------------------
 #-- Trig Source ---
 record(mbbo, "$(P):TRIG:SRC"){
@@ -124,6 +151,7 @@ record(mbbo,"$(P):TRIG:SRC_sync") {
   field(OMSL, "closed_loop")
   field(OUT,  "$(P):TRIG:SRC PP")
 }
+
 #-- Trig Level ---
 record(ao, "$(P):TRIG:LVL"){
   field(DESC, "Set trigger Level")
@@ -163,6 +191,7 @@ record(ao,"$(P):TRIG:LVL_sync") {
   field(OMSL, "closed_loop")
   field(OUT,  "$(P):TRIG:LVL PP")
 }
+
 #-- Trig Rate ---
 record(ao, "$(P):TRIG:RATE"){
   field(DESC, "Set trigger Rate")
@@ -202,12 +231,48 @@ record(ao,"$(P):TRIG:RATE_sync") {
   field(OMSL, "closed_loop")
   field(OUT,  "$(P):TRIG:RATE PP")
 }
+
 #-- Single-shot ---
 record(bo, "$(P):TRIG:SS"){
   field(DESC, "Do single shot")
   field(DTYP, "stream")
   field(OUT,  "@$(PROTOFILE) singleShot $(L) $(A)")
 }
+
+#-- Advanced Triggering ---
+record(bi, "$(P):TRIG:ADVANCED_RBV") {
+  field(DESC, "Advanced trig mode")
+  field(DTYP, "stream")
+  field(INP,  "@$(PROTOFILE) getAdvTrigMode $(L) $(A)")
+  field(ZNAM, "Disabled")
+  field(ONAM, "Enabled")
+}
+record(ai, "$(P):TRIG:HOLDOFF_RBV"){
+  field(DESC, "Trigger holdoff")
+  field(DTYP, "stream")
+  field(INP,  "@$(PROTOFILE) getTrigHoldoff $(L) $(A)")
+  field(EGU,  "s")
+  field(PREC, "15")
+}
+record(mbbi, "$(P):TRIG:INHIBIT_RBV"){
+  field(DESC, "Trigger inhibit")
+  field(DTYP, "stream")
+  field(INP,  "@$(PROTOFILE) getTrigInhibit $(L) $(A)")
+  field(ZRVL, "0")
+  field(ONVL, "1")
+  field(TWVL, "2")
+  field(THVL, "3")
+  field(FRVL, "4")
+  field(FVVL, "5")
+  field(ZRST, "Off")
+  field(ONST, "Triggers")
+  field(TWST, "AB")
+  field(THST, "AB,CD")
+  field(FRST, "AB,CD,EF")
+  field(FVST, "AB,CD,EF,GH")
+}
+
+
 # Burst Mode --------------------------
 record(bi, "$(P):BURST:MODE"){
   field(DESC, "")
@@ -235,6 +300,7 @@ record(ai, "$(P):BURST:PERIOD"){
   field(PREC, "15")
   field(EGU,  "s")
 }
+
 # Init and read sequences ---------------------------
 record(seq, "$(P):SEQ0"){
   field(DESC, "Initialization sequence")
@@ -274,23 +340,23 @@ record(seq, "$(P):SEQ1"){
 }
 record(seq, "$(P):SEQ2"){
   field(DESC, "Read sequence")
-  field(LNK1, "$(P):REF:CH1.PROC")
-  field(DLY1, "$(DELAY1)")
-  field(LNK2, "$(P):REF:CH2.PROC")
+#  field(LNK1, "$(P):REF:CH1_RBV.PROC")
+#  field(DLY1, "$(DELAY1)")
+  field(LNK2, "$(P):REF:CH2_RBV.PROC")
   field(DLY2, "$(DELAY1)")
-  field(LNK3, "$(P):REF:CH3.PROC")
+  field(LNK3, "$(P):REF:CH3_RBV.PROC")
   field(DLY3, "$(DELAY1)")
-  field(LNK4, "$(P):REF:CH4.PROC")
+  field(LNK4, "$(P):REF:CH4_RBV.PROC")
   field(DLY4, "$(DELAY1)")
-  field(LNK5, "$(P):REF:CH5.PROC")
+  field(LNK5, "$(P):REF:CH5_RBV.PROC")
   field(DLY5, "$(DELAY1)")
-  field(LNK6, "$(P):REF:CH6.PROC")
+  field(LNK6, "$(P):REF:CH6_RBV.PROC")
   field(DLY6, "$(DELAY1)")
-  field(LNK7, "$(P):REF:CH7.PROC")
+  field(LNK7, "$(P):REF:CH7_RBV.PROC")
   field(DLY7, "$(DELAY1)")
-  field(LNK8, "$(P):REF:CH8.PROC")
+  field(LNK8, "$(P):REF:CH8_RBV.PROC")
   field(DLY8, "$(DELAY1)")
-  field(LNK9, "$(P):REF:CH9.PROC")
+  field(LNK9, "$(P):REF:CH9_RBV.PROC")
   field(DLY9, "$(DELAY1)")
   field(LNKA,"$(P):SEQ3.PROC")
   field(DLYA,"$(DELAY1)")
@@ -313,8 +379,19 @@ record(seq, "$(P):SEQ3"){
   field(DLY8, "$(DELAY1)")
   field(LNK9, "$(P):BURST:DELAY.PROC")
   field(DLY9, "$(DELAY1)")
-  field(LNKA, "$(P):BURST:PERIOD.PROC")
+  field(LNKA, "$(P):SEQ4.PROC")
   field(DLYA, "$(DELAY1)")
+}
+record(seq, "$(P):SEQ4"){
+  field(DESC, "Read sequence")
+  field(LNK1, "$(P):BURST:PERIOD.PROC")
+  field(DLY1, "$(DELAY1)")
+  field(LNK2, "$(P):TRIG:ADVANCED_RBV.PROC")
+  field(DLY2, "$(DELAY1)")
+  field(LNK3, "$(P):TRIG:HOLDOFF_RBV.PROC")
+  field(DLY3, "$(DELAY1)")
+  field(LNK4, "$(P):TRIG:INHIBIT_RBV.PROC")
+  field(DLY4, "$(DELAY1)")
 }
 
 

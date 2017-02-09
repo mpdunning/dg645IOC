@@ -10,7 +10,7 @@ dbLoadDatabase "dbd/dg645.dbd"
 dg645_registerRecordDeviceDriver pdbbase
 
 epicsEnvSet("P",         "ASTA:DG01")
-#epicsEnvSet("IP",        "172.27.248.40")
+#epicsEnvSet("IP",        "sioc-asta-dg01")  # Swapped with sioc-esb-dg05=172.27.248.171
 epicsEnvSet("IP",        "172.27.248.171")
 epicsEnvSet("DESC",      "ASTA Bunker")
 epicsEnvSet("PROTOFILE", "dg645.proto")
@@ -26,7 +26,6 @@ vxi11Configure( "L0","$(IP)",0,0.0,"$(ADDR)",0,0)
 #asynSetTraceIOMask("L0",-1,0x2)
 
 dbLoadRecords("db/dg645.db","IOCNAME=${IOC},P=$(P),DESC=$(DESC),PROTOFILE=$(PROTOFILE),PORT=P0,L=L0,A=$(ADDR),DELAY0=$(DELAY0),SCAN0=$(SCAN0),DELAY1=$(DELAY1),SCAN1=$(SCAN1)")
-dbLoadRecords("db/dg645Ch.db","P=$(P),PROTOFILE=$(PROTOFILE),PORT=P0,L=L0,A=$(ADDR)")
 dbLoadRecords("db/asynRecord.db","P=$(P):,R=asyn,PORT=L0,ADDR=0,OMAX=0,IMAX=0")
 
 cd ${TOP}/iocBoot/${IOC}

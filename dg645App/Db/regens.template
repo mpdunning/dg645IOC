@@ -2,9 +2,9 @@ record( ao, "$(P):DELAY:REGEN$(REG)"){
   field( DESC, "Delay, regen $(REG)")
   field( PREC, "3")
   field( DRVL, "0")
-  field( DRVH, "10000")
+  field( DRVH, "1e9")
   field( LOPR, "0")
-  field( HOPR, "10000")
+  field( HOPR, "1e9")
   field( EGU,  "ns")
   field( FLNK, "$(P):DELAY:REGEN$(REG):WRITE")
 }
@@ -47,9 +47,9 @@ record( ao, "$(P):WIDTH:REGEN$(REG)"){
   field( DESC, "Width, regen $(REG)")
   field( PREC, "3")
   field( DRVL, "0")
-  field( DRVH, "10000")
+  field( DRVH, "1e9")
   field( LOPR, "0")
-  field( HOPR, "10000")
+  field( HOPR, "1e9")
   field( EGU,  "ns")
   field( FLNK, "$(P):WIDTH:REGEN$(REG):WRITE")
 }

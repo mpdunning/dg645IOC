@@ -1,3 +1,10 @@
+file dg645Common.template {
+pattern
+{None}
+{None}
+}
+
+
 file dg645Ch.template {
 pattern 
 {CHAN, REF}
@@ -12,4 +19,5 @@ pattern
 {   8,   0}
 {   9,   8}
 }
+
 

@@ -281,6 +281,13 @@ record(bi, "$(P):BURST:MODE"){
   field(ZNAM, "Disabled")
   field(ONAM, "Enabled")
 }
+record(bi, "$(P):BURST:T0_CONFIG"){
+  field(DESC, "Burst T0 Config")
+  field(DTYP, "stream")
+  field(INP,  "@$(PROTOFILE) getBurstT0Config $(L) $(A)")
+  field(ZNAM, "All delay cycles")
+  field(ONAM, "First delay cycle")
+}
 record(longin, "$(P):BURST:CNT"){
   field(DESC, "")
   field(DTYP, "stream")
@@ -392,6 +399,8 @@ record(seq, "$(P):SEQ4"){
   field(DLY3, "$(DELAY1)")
   field(LNK4, "$(P):TRIG:INHIBIT_RBV.PROC")
   field(DLY4, "$(DELAY1)")
+  field(LNK5, "$(P):BURST:T0_CONFIG.PROC")
+  field(DLY5, "$(DELAY1)")
 }
 
 

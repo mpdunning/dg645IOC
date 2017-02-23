@@ -1,3 +1,4 @@
+#--- Delay, Regen $(REG) ----------------
 record( ao, "$(P):DELAY:REGEN$(REG)"){
   field( DESC, "Delay, regen $(REG)")
   field( PREC, "3")
@@ -34,15 +35,7 @@ record( ao, "$(P):DELAY:REGEN$(REG):SYNC"){
   field( OMSL, "closed_loop")
   field( OUT,  "$(P):DELAY:REGEN$(REG) PP")
 }
-#---------------------------------------------------------
-#record( calc, "$(P):WIDTH:REGEN$(REG)"){
-#  field( DESC, "Pulse width, regen $(REG)")
-#  field( INPA, "$(P):DELAY:CH$(CHAN1) CPP")
-#  field( INPB, "$(P):DELAY:CH$(CHAN2) CPP")
-#  field( CALC, "(B-0)*1E9")
-#  field( PREC, "3")
-#  field( EGU,  "ns")
-#}
+#--- Width, Regen $(REG) ----------------
 record( ao, "$(P):WIDTH:REGEN$(REG)"){
   field( DESC, "Width, regen $(REG)")
   field( PREC, "3")

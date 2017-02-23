@@ -17,6 +17,7 @@ setTrigRate      { out "trat %f"                                                
 singleShot       { out "*trg"                                                       ; }
 
 getBurstMode     { out "burm?"                           ;in "%d"                   ; }
+getBurstT0Config { out "burt?"                           ;in "%d"                   ; }
 getBurstCnt      { out "burc?"                           ;in "%d"                   ; }
 getBurstDelay    { out "burd?"                           ;in "%f"                   ; }
 getBurstPeriod   { out "burp?"                           ;in "%f"                   ; }
